@@ -655,7 +655,16 @@
                 <h2>Sync with the Lab</h2>
                 <p>Available for high-stakes consulting, custom builds, and AI integration projects.</p>
             </div>
-            <form class="contact-form" name="contact" netlify>
+            <div id="form-status"
+                style="display: none; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; text-align: center; font-weight: 700;">
+            </div>
+
+            <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                <input type="hidden" name="form-name" value="contact" />
+                <p style="display: none;">
+                    <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+                </p>
+
                 <div class="form-grid">
                     <input type="text" name="name" placeholder="Name" required>
                     <input type="email" name="email" placeholder="Email" required>
@@ -736,6 +745,51 @@
         document.head.appendChild(style);
 
         initParticles();
+
+        // Contact Form Submission
+        const contactForm = document.querySelector('.contact-form');
+        const formStatus = document.getElementById('form-status');
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const formData = new FormData(contactForm);
+
+                // Show sending state
+                const submitBtn = contactForm.querySelector('button[type="submit"]');
+                const originalBtnText = submitBtn.innerText;
+                submitBtn.innerText = 'Transmitting...';
+                submitBtn.disabled = true;
+
+                fetch("/", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: new URLSearchParams(formData).toString(),
+                })
+                    .then(() => {
+                        formStatus.style.display = 'block';
+                        formStatus.style.background = 'rgba(0, 212, 255, 0.1)';
+                        formStatus.style.color = 'var(--accent-primary)';
+                        formStatus.style.border = '1px solid var(--accent-primary)';
+                        formStatus.innerText = '✓ Connection Established. Message Transmitted.';
+                        contactForm.reset();
+                    })
+                    .catch((error) => {
+                        formStatus.style.display = 'block';
+                        formStatus.style.background = 'rgba(255, 107, 157, 0.1)';
+                        formStatus.style.color = 'var(--accent-secondary)';
+                        formStatus.style.border = '1px solid var(--accent-secondary)';
+                        formStatus.innerText = '✕ Transmission Failed. Please try again later.';
+                    })
+                    .finally(() => {
+                        submitBtn.innerText = originalBtnText;
+                        submitBtn.disabled = false;
+                        setTimeout(() => {
+                            formStatus.style.display = 'none';
+                        }, 5000);
+                    });
+            });
+        }
     </script>
 </body>
 
