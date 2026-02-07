@@ -27,7 +27,7 @@ I am an **IT Specialist & Operations Manager** with a profound passion for techn
 - 💼 **Just Boring**: [Operations & Strategy](https://justboring.co.uk)
 - 👨‍🍳 **My own Chef**: [AI Nutri-Companion](https://github.com/Tom19840813/My-own-Chef)
 - 🍌 **Banana Nano Pro**: [Prompt Engineering Suite](https://github.com/Tom19840813/Prompt-Generator-for-Nano-Banana-Pro-)
-- 🐍 **Snake Battle**: [Multiplayer Arena](https://github.com/Tom19840813/Snake-Battle-Arena)
+- 🐍 **Snake Battle**: [Enter the Arena](https://tom-snake-battle-arena-26.netlify.app/)
 
 👉 **View Full Portfolio:** [Tom19840813.github.io](https://Tom19840813.github.io)
 
