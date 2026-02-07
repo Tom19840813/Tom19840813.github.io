@@ -294,8 +294,14 @@
         /* Lab Section */
         .lab-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 1400px) {
+            .lab-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
         }
 
         .lab-card {
@@ -501,8 +507,7 @@
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#lab">The Lab</a></li>
-                <li><a href="#projects">Projects</a></li>
+                <li><a href="#work">Projects</a></li>
                 <li><a href="#expertise">Expertise</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -519,8 +524,8 @@
             <p class="subtitle reveal">IT Specialist & Operations Manager merging three decades of experience with
                 cutting-edge AI, 3D Design, and Automation.</p>
             <div class="cta-group reveal">
-                <a href="#lab" class="btn btn-primary">Enter the Lab</a>
-                <a href="#projects" class="btn btn-outline">Traditional Work</a>
+                <a href="#work" class="btn btn-primary">Enter the Lab</a>
+                <a href="#expertise" class="btn btn-outline">Traditional Work</a>
             </div>
         </div>
     </section>
@@ -552,13 +557,12 @@
         </div>
     </section>
 
-    <!-- Lab Section - The Heart of Innovation -->
-    <section id="lab" class="reveal">
+    <!-- Consolidated Work Section - Innovations & Projects -->
+    <section id="work" class="reveal">
         <div class="section-header">
-            <div class="hero-badge">Experimental Realm</div>
-            <h2>The Lab</h2>
-            <p>A playground where AI, gaming, and rapid prototyping collide. Each project is an experiment in
-                efficiency.</p>
+            <div class="hero-badge">One Roof</div>
+            <h2>Projects & Experiments</h2>
+            <p>A unified showcase of AI-driven tools, interactive games, and professional platforms.</p>
         </div>
         <div class="lab-grid">
 
@@ -567,29 +571,27 @@
                 <img src="assets/lab/my_chef.png" alt="My own Chef" class="lab-img">
                 <div class="lab-content">
                     <h3>My own Chef</h3>
-                    <p>AI-driven culinary companion that optimizes nutrition and generates bespoke recipe creations
-                        based on available inventory.</p>
+                    <p>AI-driven culinary companion that optimizes nutrition and generates bespoke recipes.</p>
                     <div class="lab-tags">
                         <span class="tag">AI Agent</span>
                         <span class="tag">Automation</span>
                     </div>
-                    <a href="https://github.com/Tom19840813/My-own-Chef" class="lab-link">Explore Repo →</a>
+                    <a href="https://github.com/Tom19840813/My-own-Chef" class="lab-link">Explore →</a>
                 </div>
             </div>
 
-            <!-- Prompt Generator -->
+            <!-- Banana Nano Pro -->
             <div class="lab-card">
                 <img src="assets/lab/banana_nano.png" alt="Prompt Generator" class="lab-img">
                 <div class="lab-content">
                     <h3>Banana Nano Pro</h3>
-                    <p>Advanced prompt engineering suite designed specifically for specialized hardware configurations
-                        and rapid AI iteration.</p>
+                    <p>Advanced prompt engineering suite designed for specialized hardware configs.</p>
                     <div class="lab-tags">
                         <span class="tag">LLM</span>
-                        <span class="tag">Prompt Eng</span>
+                        <span class="tag">AI Tools</span>
                     </div>
                     <a href="https://github.com/Tom19840813/Prompt-Generator-for-Nano-Banana-Pro-"
-                        class="lab-link">Explore Repo →</a>
+                        class="lab-link">Explore →</a>
                 </div>
             </div>
 
@@ -598,13 +600,12 @@
                 <img src="assets/lab/galaga.png" alt="Retro Galaga" class="lab-img">
                 <div class="lab-content">
                     <h3>Retro Galaga</h3>
-                    <p>A faithful reconstruction of classic arcade mechanics, enhanced with modern physics and visual
-                        effects.</p>
+                    <p>A reconstruction of classic arcade mechanics with modern visuals.</p>
                     <div class="lab-tags">
+                        <span class="tag">Gaming</span>
                         <span class="tag">Retro</span>
-                        <span class="tag">Canvas</span>
                     </div>
-                    <a href="https://github.com/Tom19840813/Retro-Galaga" class="lab-link">Explore Repo →</a>
+                    <a href="https://retro-galaga.netlify.app/" class="lab-link">Play Now →</a>
                 </div>
             </div>
 
@@ -612,39 +613,13 @@
             <div class="lab-card">
                 <img src="assets/lab/snake_arena.png" alt="Snake Battle Arena" class="lab-img">
                 <div class="lab-content">
-                    <h3>Snake Battle Arena</h3>
-                    <p>A competitive multiplayer take on the classic snake game, featuring various arenas and tactical
-                        power-ups.</p>
+                    <h3>Snake Battle</h3>
+                    <p>Competitive multiplayer take on the classic snake game with power-ups.</p>
                     <div class="lab-tags">
                         <span class="tag">Multiplayer</span>
                         <span class="tag">Arena</span>
                     </div>
-                </div>
-            </div>
-    </section>
-
-    <!-- Projects Section - Live Applications -->
-    <section id="projects" class="reveal">
-        <div class="section-header">
-            <div class="hero-badge">Live Applications</div>
-            <h2>Selected Projects</h2>
-            <p>A showcase of functional applications and interactive experiences deployed for production and
-                entertainment.</p>
-        </div>
-        <div class="lab-grid">
-
-            <!-- Retro Galaga -->
-            <div class="lab-card">
-                <img src="assets/lab/galaga.png" alt="Retro Galaga" class="lab-img">
-                <div class="lab-content">
-                    <h3>Retro Galaga</h3>
-                    <p>A faithful reconstruction of classic arcade mechanics, enhanced with modern physics and visual
-                        effects.</p>
-                    <div class="lab-tags">
-                        <span class="tag">Arcade</span>
-                        <span class="tag">Gaming</span>
-                    </div>
-                    <a href="https://retro-galaga.netlify.app/" class="lab-link">Play Now →</a>
+                    <a href="https://github.com/Tom19840813/Snake-Battle-Arena" class="lab-link">Explore →</a>
                 </div>
             </div>
 
@@ -655,8 +630,7 @@
                     🏓</div>
                 <div class="lab-content">
                     <h3>Retro AI Pong</h3>
-                    <p>Classic Pong logic combined with a modern AI opponent, built with fluid animations and responsive
-                        controls.</p>
+                    <p>Classic Pong logic combined with an AI opponent and fluid animations.</p>
                     <div class="lab-tags">
                         <span class="tag">AI</span>
                         <span class="tag">Mini-game</span>
@@ -672,11 +646,10 @@
                     💼</div>
                 <div class="lab-content">
                     <h3>Just Boring</h3>
-                    <p>A professional operations management platform focusing on efficiency, strategy, and business
-                        scaling.</p>
+                    <p>A professional operations management platform focusing on business strategy.</p>
                     <div class="lab-tags">
-                        <span class="tag">Business</span>
-                        <span class="tag">Operations</span>
+                        <span class="tag">Strategy</span>
+                        <span class="tag">Ops</span>
                     </div>
                     <a href="https://justboring.co.uk" class="lab-link">Visit Site →</a>
                 </div>

@@ -18,21 +18,18 @@ I am an **IT Specialist & Operations Manager** with a profound passion for techn
 
 ---
 
-### 🧪 The Lab
-
-I am currently building out **"The Lab"**, a showcase for my experimental applications and AI-driven projects.
-
-👉 **View the Lab & Portfolio:** [Tom19840813.github.io](https://Tom19840813.github.io)
-
 ---
 
----
-
-### 📂 Live Projects
+### 📂 Projects & Experiments
 
 - 🎮 **Retro Galaga**: [Play Level 1](https://retro-galaga.netlify.app/)
 - 🏓 **Retro AI Pong**: [Challenge the AI](https://retro-ai-pong.netlify.app/)
 - 💼 **Just Boring**: [Operations & Strategy](https://justboring.co.uk)
+- 👨‍🍳 **My own Chef**: [AI Nutri-Companion](https://github.com/Tom19840813/My-own-Chef)
+- 🍌 **Banana Nano Pro**: [Prompt Engineering Suite](https://github.com/Tom19840813/Prompt-Generator-for-Nano-Banana-Pro-)
+- 🐍 **Snake Battle**: [Multiplayer Arena](https://github.com/Tom19840813/Snake-Battle-Arena)
+
+👉 **View Full Portfolio:** [Tom19840813.github.io](https://Tom19840813.github.io)
 
 ---
 
