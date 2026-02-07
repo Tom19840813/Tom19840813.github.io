@@ -1,0 +1,140 @@
+/* Podcast Component Styling */
+.podcast-container {
+    padding: 4rem 2rem;
+    background: radial-gradient(circle at 50% 50%, rgba(20, 20, 25, 1) 0%, rgba(10, 10, 12, 1) 100%);
+    border-radius: 24px;
+    margin: 2rem auto;
+    max-width: 900px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.podcast-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 180deg at 50% 50%, #4f46e5 0deg, #ec4899 180deg, #4f46e5 360deg);
+    animation: rotate 20s linear infinite;
+    opacity: 0.03;
+    z-index: 0;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.podcast-content {
+    position: relative;
+    z-index: 1;
+}
+
+.vibe-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.vibe-subtitle {
+    font-size: 1.1rem;
+    color: #94a3b8;
+    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.visualizer-box {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 3rem;
+}
+
+.bar {
+    width: 6px;
+    height: 20px;
+    background: linear-gradient(to top, #4f46e5, #ec4899);
+    border-radius: 3px;
+    transition: height 0.1s ease;
+}
+
+.podcast-btn {
+    padding: 1rem 2.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary {
+    background: #4f46e5;
+    color: white;
+    box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(79, 70, 229, 0.4);
+    background: #4338ca;
+}
+
+.btn-danger {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.btn-danger:hover {
+    background: rgba(239, 68, 68, 0.2);
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #334155;
+}
+
+.dot.active {
+    background: #10b981;
+    box-shadow: 0 0 10px #10b981;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Modal/Mobile responsiveness */
+@media (max-width: 768px) {
+    .vibe-title { font-size: 1.8rem; }
+    .podcast-container { margin: 1rem; padding: 2rem 1rem; }
+}
