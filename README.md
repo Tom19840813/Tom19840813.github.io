@@ -26,10 +26,20 @@ I am currently building out **"The Lab"**, a showcase for my experimental applic
 
 ---
 
+---
+
+### 📂 Live Projects
+
+- 🎮 **Retro Galaga**: [Play Level 1](https://retro-galaga.netlify.app/)
+- 🏓 **Retro AI Pong**: [Challenge the AI](https://retro-ai-pong.netlify.app/)
+- 💼 **Just Boring**: [Operations & Strategy](https://justboring.co.uk)
+
+---
+
 ### 📫 Connect with Me
 
 - 🌐 **Portfolio & Apps**: [tamasmolnar.nichesite.org](https://tamasmolnar.nichesite.org)
-- 🏢 **Operations & Strategy**: [justboring.co.uk](https://justboring.co.uk)
+- 🏢 **GitHub Profile**: [github.com/Tom19840813](https://github.com/Tom19840813)
 
 *“I prefer to solve complex problems and deliver high-performance solutions.”*
 

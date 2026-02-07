@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tamas Molnar | IT Specialist & Creative Technologist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/podcast.css">
+    <style>
+        :root {
+            --bg-color: #050510;
+            --accent-primary: #00d4ff;
+            --accent-secondary: #ff6b9d;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-main: #e0e0e0;
+            --text-muted: #a0a0b0;
+            --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Mesh Gradient Background */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(at 0% 0%, rgba(0, 212, 255, 0.1) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(255, 107, 157, 0.1) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(0, 212, 255, 0.1) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(255, 107, 157, 0.1) 0px, transparent 50%);
+            z-index: -2;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 50%;
+            opacity: 0.1;
+            filter: blur(2px);
+            pointer-events: none;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 2rem;
+            background: rgba(5, 5, 20, 0.7);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+            transition: var(--transition-smooth);
+        }
+
+        nav.scrolled {
+            padding: 1rem 2rem;
+            background: rgba(5, 5, 20, 0.9);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            font-weight: 500;
+            position: relative;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-primary);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -3px;
+            background: linear-gradient(to right, #fff, #a0a0b0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-group {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .btn {
+            padding: 1.2rem 2.8rem;
+            border-radius: 100px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-outline {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Sections */
+        section {
+            padding: 8rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 1rem;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+        }
+
+        .about-visual {
+            position: relative;
+        }
+
+        .profile-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 3rem;
+            text-align: center;
+            backdrop-filter: blur(30px);
+        }
+
+        .profile-card img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent-primary);
+            margin-bottom: 2rem;
+        }
+
+        /* Lab Section */
+        .lab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .lab-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lab-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-primary);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .lab-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .lab-content {
+            padding: 1.8rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lab-content h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: var(--accent-primary);
+        }
+
+        .lab-content p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .lab-tags {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 5px 12px;
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            border-radius: 6px;
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+
+        .lab-link {
+            text-decoration: none;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition-smooth);
+        }
+
+        .lab-link:hover {
+            color: var(--accent-secondary);
+            transform: translateX(5px);
+        }
+
+        /* Experience Cards */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            transition: var(--transition-smooth);
+        }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 4rem;
+            border-radius: 40px;
+            backdrop-filter: blur(40px);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .form-full {
+            grid-column: span 2;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            color: white;
+            font-family: inherit;
+            transition: var(--transition-smooth);
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Scroll Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsiveness */
+        @media (max-width: 968px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-full {
+                grid-column: span 1;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-gradient"></div>
+    <div class="bg-animation" id="particles"></div>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">TM</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#lab">The Lab</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#expertise">Expertise</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="hamburger">☰</button>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-badge reveal">30+ Years of IT Excellence</div>
+            <h1 class="reveal">Architecting the <br><span
+                    style="background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Future
+                    of Tech</span></h1>
+            <p class="subtitle reveal">IT Specialist & Operations Manager merging three decades of experience with
+                cutting-edge AI, 3D Design, and Automation.</p>
+            <div class="cta-group reveal">
+                <a href="#lab" class="btn btn-primary">Enter the Lab</a>
+                <a href="#projects" class="btn btn-outline">Traditional Work</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="reveal">
+        <div class="about-grid">
+            <div class="about-text">
+                <div class="hero-badge" style="margin-bottom: 1rem;">Our Story</div>
+                <h2>From 286 DX to <br>AI Pioneers</h2>
+                <p>My journey started in the golden era of computing with a 286 DX 33. That machine taught me the
+                    fundamentals of problem-solving—a skill I've spent over 30 years refining across complex IT
+                    landscapes.</p>
+                <p>Today, I thrive at the intersection of practical business operations and experimental technology. I
+                    don't just use tools; I build ecosystems that solve real-world problems.</p>
+            </div>
+            <div class="about-visual">
+                <div class="profile-card">
+                    <img src="me.jpg" alt="Tamas Molnar">
+                    <h3>Tamas Molnar</h3>
+                    <p style="color: var(--accent-primary); font-weight: 700; margin-bottom: 1rem;">IT Specialist &
+                        Operations Manager</p>
+                    <div class="lab-tags" style="justify-content: center;">
+                        <span class="tag">AI Strategy</span>
+                        <span class="tag">3D Engineering</span>
+                        <span class="tag">DevOps</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lab Section - The Heart of Innovation -->
+    <section id="lab" class="reveal">
+        <div class="section-header">
+            <div class="hero-badge">Experimental Realm</div>
+            <h2>The Lab</h2>
+            <p>A playground where AI, gaming, and rapid prototyping collide. Each project is an experiment in
+                efficiency.</p>
+        </div>
+        <div class="lab-grid">
+
+            <!-- My own Chef -->
+            <div class="lab-card">
+                <img src="assets/lab/my_chef.png" alt="My own Chef" class="lab-img">
+                <div class="lab-content">
+                    <h3>My own Chef</h3>
+                    <p>AI-driven culinary companion that optimizes nutrition and generates bespoke recipe creations
+                        based on available inventory.</p>
+                    <div class="lab-tags">
+                        <span class="tag">AI Agent</span>
+                        <span class="tag">Automation</span>
+                    </div>
+                    <a href="https://github.com/Tom19840813/My-own-Chef" class="lab-link">Explore Repo →</a>
+                </div>
+            </div>
+
+            <!-- Prompt Generator -->
+            <div class="lab-card">
+                <img src="assets/lab/banana_nano.png" alt="Prompt Generator" class="lab-img">
+                <div class="lab-content">
+                    <h3>Banana Nano Pro</h3>
+                    <p>Advanced prompt engineering suite designed specifically for specialized hardware configurations
+                        and rapid AI iteration.</p>
+                    <div class="lab-tags">
+                        <span class="tag">LLM</span>
+                        <span class="tag">Prompt Eng</span>
+                    </div>
+                    <a href="https://github.com/Tom19840813/Prompt-Generator-for-Nano-Banana-Pro-"
+                        class="lab-link">Explore Repo →</a>
+                </div>
+            </div>
+
+            <!-- Retro Galaga -->
+            <div class="lab-card">
+                <img src="assets/lab/galaga.png" alt="Retro Galaga" class="lab-img">
+                <div class="lab-content">
+                    <h3>Retro Galaga</h3>
+                    <p>A faithful reconstruction of classic arcade mechanics, enhanced with modern physics and visual
+                        effects.</p>
+                    <div class="lab-tags">
+                        <span class="tag">Retro</span>
+                        <span class="tag">Canvas</span>
+                    </div>
+                    <a href="https://github.com/Tom19840813/Retro-Galaga" class="lab-link">Explore Repo →</a>
+                </div>
+            </div>
+
+            <!-- Snake Battle Arena -->
+            <div class="lab-card">
+                <img src="assets/lab/snake_arena.png" alt="Snake Battle Arena" class="lab-img">
+                <div class="lab-content">
+                    <h3>Snake Battle Arena</h3>
+                    <p>A competitive multiplayer take on the classic snake game, featuring various arenas and tactical
+                        power-ups.</p>
+                    <div class="lab-tags">
+                        <span class="tag">Multiplayer</span>
+                        <span class="tag">Arena</span>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <!-- Projects Section - Live Applications -->
+    <section id="projects" class="reveal">
+        <div class="section-header">
+            <div class="hero-badge">Live Applications</div>
+            <h2>Selected Projects</h2>
+            <p>A showcase of functional applications and interactive experiences deployed for production and
+                entertainment.</p>
+        </div>
+        <div class="lab-grid">
+
+            <!-- Retro Galaga -->
+            <div class="lab-card">
+                <img src="assets/lab/galaga.png" alt="Retro Galaga" class="lab-img">
+                <div class="lab-content">
+                    <h3>Retro Galaga</h3>
+                    <p>A faithful reconstruction of classic arcade mechanics, enhanced with modern physics and visual
+                        effects.</p>
+                    <div class="lab-tags">
+                        <span class="tag">Arcade</span>
+                        <span class="tag">Gaming</span>
+                    </div>
+                    <a href="https://retro-galaga.netlify.app/" class="lab-link">Play Now →</a>
+                </div>
+            </div>
+
+            <!-- Retro AI Pong -->
+            <div class="lab-card">
+                <div class="lab-img"
+                    style="background: linear-gradient(45deg, #0f0c29, #302b63, #24243e); display: flex; align-items: center; justify-content: center; font-size: 3rem;">
+                    🏓</div>
+                <div class="lab-content">
+                    <h3>Retro AI Pong</h3>
+                    <p>Classic Pong logic combined with a modern AI opponent, built with fluid animations and responsive
+                        controls.</p>
+                    <div class="lab-tags">
+                        <span class="tag">AI</span>
+                        <span class="tag">Mini-game</span>
+                    </div>
+                    <a href="https://retro-ai-pong.netlify.app/" class="lab-link">Play Now →</a>
+                </div>
+            </div>
+
+            <!-- Just Boring -->
+            <div class="lab-card">
+                <div class="lab-img"
+                    style="background: linear-gradient(45deg, #1e3c72, #2a5298); display: flex; align-items: center; justify-content: center; font-size: 3rem;">
+                    💼</div>
+                <div class="lab-content">
+                    <h3>Just Boring</h3>
+                    <p>A professional operations management platform focusing on efficiency, strategy, and business
+                        scaling.</p>
+                    <div class="lab-tags">
+                        <span class="tag">Business</span>
+                        <span class="tag">Operations</span>
+                    </div>
+                    <a href="https://justboring.co.uk" class="lab-link">Visit Site →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gemini Interactive Podcast Section -->
+    <section id="podcast" class="reveal">
+        <div id="podcast-app"></div>
+    </section>
+
+    <section id="expertise" class="reveal">
+        <div class="section-header">
+            <div class="hero-badge">Core Expertise</div>
+            <h2>Professional Legacy</h2>
+        </div>
+        <div class="skills-grid">
+            <div class="card">
+                <span class="card-icon">🖥️</span>
+                <h3>Infrastructure</h3>
+                <p>Specializing in custom high-performance builds, enterprise-grade networking, and robust hardware
+                    solutions.</p>
+            </div>
+            <div class="card">
+                <span class="card-icon">🤖</span>
+                <h3>AI Integration</h3>
+                <p>Deploying Stable Diffusion, N8N workflows, and custom LLM solutions to drive business efficiency.</p>
+            </div>
+            <div class="card">
+                <span class="card-icon">📐</span>
+                <h3>3D Engineering</h3>
+                <p>Precision 3D modeling with Fusion 360, technical rendering, and production-grade 3D printing.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="reveal">
+        <div class="contact-container">
+            <div class="section-header">
+                <h2>Sync with the Lab</h2>
+                <p>Available for high-stakes consulting, custom builds, and AI integration projects.</p>
+            </div>
+            <div id="form-status"
+                style="display: none; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; text-align: center; font-weight: 700;">
+            </div>
+
+            <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                <input type="hidden" name="form-name" value="contact" />
+                <p style="display: none;">
+                    <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+                </p>
+
+                <div class="form-grid">
+                    <input type="text" name="name" placeholder="Name" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <div class="form-full">
+                        <input type="text" name="subject" placeholder="Subject">
+                    </div>
+                    <div class="form-full">
+                        <textarea name="message" rows="5" placeholder="Message" required></textarea>
+                    </div>
+                    <div class="form-full" style="text-align: center;">
+                        <button type="submit" class="btn btn-primary">Initiate Contact</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Tamas Molnar. Synthesized with Passion & Artificial Intelligence.</p>
+    </footer>
+
+    <script>
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        });
+
+        // Reveal Animations
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Background Particles
+        function initParticles() {
+            const container = document.getElementById('particles');
+            const count = 40;
+            for (let i = 0; i < count; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                const size = Math.random() * 5 + 2;
+                p.style.width = `${size}px`;
+                p.style.height = `${size}px`;
+                p.style.left = `${Math.random() * 100}%`;
+                p.style.top = `${Math.random() * 100}%`;
+                p.style.animation = `float ${Math.random() * 10 + 10}s infinite ease-in-out`;
+                p.style.animationDelay = `${Math.random() * 5}s`;
+                container.appendChild(p);
+            }
+        }
+
+        // Add particle keyframes dynamically
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0%, 100% { transform: translate(0, 0); opacity: 0.1; }
+                50% { transform: translate(30px, 30px); opacity: 0.3; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        initParticles();
+
+        // Contact Form Submission
+        const contactForm = document.querySelector('.contact-form');
+        const formStatus = document.getElementById('form-status');
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const formData = new FormData(contactForm);
+
+                // Show sending state
+                const submitBtn = contactForm.querySelector('button[type="submit"]');
+                const originalBtnText = submitBtn.innerText;
+                submitBtn.innerText = 'Transmitting...';
+                submitBtn.disabled = true;
+
+                fetch("/", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: new URLSearchParams(formData).toString(),
+                })
+                    .then(() => {
+                        formStatus.style.display = 'block';
+                        formStatus.style.background = 'rgba(0, 212, 255, 0.1)';
+                        formStatus.style.color = 'var(--accent-primary)';
+                        formStatus.style.border = '1px solid var(--accent-primary)';
+                        formStatus.innerText = '✓ Connection Established. Message Transmitted.';
+                        contactForm.reset();
+                    })
+                    .catch((error) => {
+                        formStatus.style.display = 'block';
+                        formStatus.style.background = 'rgba(255, 107, 157, 0.1)';
+                        formStatus.style.color = 'var(--accent-secondary)';
+                        formStatus.style.border = '1px solid var(--accent-secondary)';
+                        formStatus.innerText = '✕ Transmission Failed. Please try again later.';
+                    })
+                    .finally(() => {
+                        submitBtn.innerText = originalBtnText;
+                        submitBtn.disabled = false;
+                        setTimeout(() => {
+                            formStatus.style.display = 'none';
+                        }, 5000);
+                    });
+            });
+        }
+    </script>
+    <script src="https://unpkg.com/@daily-co/daily-js"></script>
+    <script src="assets/js/podcast-component.js"></script>
+</body>
+
+</html>
