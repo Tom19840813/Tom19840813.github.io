@@ -1,0 +1,8 @@
+﻿[submodule "nano-banana-pro-fix"]
+	path = nano-banana-pro-fix
+	url = https://github.com/Tom19840813/Prompt-Generator-for-Nano-Banana-Pro-
+	branch = main
+[submodule "snake-battle-arena"]
+	path = snake-battle-arena
+	url = https://github.com/Tom19840813/snake-battle-arena
+	branch = main
