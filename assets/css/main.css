@@ -411,6 +411,44 @@ textarea {
     padding-top: 0;
 }
 
+.action-strip {
+    padding: 0 0 28px;
+}
+
+.action-strip-inner {
+    align-items: center;
+    background: linear-gradient(135deg, #10232d, #0f3f3c);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow);
+    color: #f7f4ef;
+    display: flex;
+    gap: 28px;
+    justify-content: space-between;
+    padding: 30px;
+}
+
+.action-strip-inner h2 {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: clamp(1.6rem, 3vw, 2.35rem);
+    line-height: 1.08;
+    margin: 0 0 10px;
+}
+
+.action-strip-inner p:last-child {
+    color: rgba(247, 244, 239, 0.78);
+    margin: 0;
+    max-width: 68ch;
+}
+
+.action-strip-buttons {
+    display: flex;
+    flex: 0 0 auto;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
 .proof-grid {
     display: grid;
     gap: 18px;
@@ -591,6 +629,20 @@ textarea {
     padding: 28px;
 }
 
+.notes-layout {
+    align-items: center;
+    display: grid;
+    gap: 28px;
+    grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.notes-layout p {
+    color: var(--muted);
+    font-size: 1.05rem;
+    margin: 0;
+    max-width: 72ch;
+}
+
 .tool-groups {
     display: grid;
     gap: 18px;
@@ -711,8 +763,18 @@ textarea {
     .hero-grid,
     .about-layout,
     .timeline-item,
-    .credentials-grid {
+    .credentials-grid,
+    .notes-layout {
         grid-template-columns: 1fr;
+    }
+
+    .action-strip-inner {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .action-strip-buttons {
+        justify-content: flex-start;
     }
 
     .metric-grid,
@@ -820,8 +882,14 @@ textarea {
     }
 
     .cta-row,
-    .contact-actions {
+    .contact-actions,
+    .action-strip-buttons {
         flex-direction: column;
+    }
+
+    .action-strip-inner {
+        border-radius: 24px;
+        padding: 24px;
     }
 }
 
