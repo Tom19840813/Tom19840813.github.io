@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Post Writer | Tamas Molnar</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f5f0e8;
+      --panel: #fffaf2;
+      --ink: #101820;
+      --muted: #66717d;
+      --line: rgba(16, 24, 32, 0.14);
+      --accent: #0f766e;
+      --accent-dark: #0d4f4b;
+      --danger: #b42318;
+      --shadow: 0 24px 70px rgba(16, 24, 32, 0.12);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #101820;
+        --panel: #17212c;
+        --ink: #f8fafc;
+        --muted: #a6b0bc;
+        --line: rgba(255, 255, 255, 0.12);
+        --accent: #2dd4bf;
+        --accent-dark: #0f766e;
+        --danger: #f97066;
+        --shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 14% 12%, rgba(15, 118, 110, 0.15), transparent 28%),
+        radial-gradient(circle at 86% 8%, rgba(196, 107, 27, 0.14), transparent 26%),
+        var(--bg);
+      color: var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+      margin: 0;
+      min-height: 100vh;
+    }
+
+    header {
+      align-items: center;
+      display: flex;
+      gap: 18px;
+      justify-content: space-between;
+      padding: 22px clamp(18px, 4vw, 42px);
+    }
+
+    main {
+      margin: 0 auto;
+      max-width: 1180px;
+      padding: 0 clamp(18px, 4vw, 42px) 54px;
+    }
+
+    h1,
+    h2 {
+      margin: 0;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      letter-spacing: -0.03em;
+      line-height: 0.98;
+    }
+
+    h2 {
+      font-size: 1.1rem;
+    }
+
+    p {
+      color: var(--muted);
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    .top-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .shell {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+    }
+
+    .panel {
+      background: color-mix(in srgb, var(--panel) 88%, transparent);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+
+    .auth-grid,
+    .field-grid,
+    .actions,
+    .post-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .field-grid {
+      grid-template-columns: minmax(0, 1.4fr) 160px;
+    }
+
+    label {
+      color: var(--muted);
+      display: grid;
+      font-size: 0.86rem;
+      font-weight: 700;
+      gap: 6px;
+    }
+
+    input,
+    textarea {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      color: var(--ink);
+      padding: 11px 12px;
+      width: 100%;
+    }
+
+    textarea {
+      min-height: 48vh;
+      resize: vertical;
+      font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+      line-height: 1.55;
+    }
+
+    button,
+    .button {
+      align-items: center;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink);
+      cursor: pointer;
+      display: inline-flex;
+      font-weight: 800;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 16px;
+      text-decoration: none;
+    }
+
+    button.primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      border-color: transparent;
+      color: white;
+    }
+
+    button.danger {
+      color: var(--danger);
+    }
+
+    .actions {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .post-list {
+      margin-top: 16px;
+      max-height: 58vh;
+      overflow: auto;
+    }
+
+    .post-item {
+      align-items: start;
+      border-radius: 12px;
+      display: grid;
+      gap: 4px;
+      justify-items: start;
+      padding: 12px;
+      text-align: left;
+      width: 100%;
+    }
+
+    .post-item strong {
+      font-size: 0.96rem;
+    }
+
+    .post-item small {
+      color: var(--muted);
+    }
+
+    .status {
+      color: var(--muted);
+      min-height: 24px;
+    }
+
+    .hint {
+      font-size: 0.92rem;
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 900px) {
+      .shell,
+      .field-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Post Writer</h1>
+      <p>Write Jekyll posts directly to GitHub Pages.</p>
+    </div>
+    <div class="top-links">
+      <a class="button" href="index.html">Portfolio</a>
+      <a class="button" href="blog.html">Blog</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="shell">
+      <aside class="panel">
+        <h2>GitHub Login</h2>
+        <p class="hint">Use a fine-grained GitHub token with contents read/write access for this repository only.</p>
+        <div class="auth-grid">
+          <label>
+            Token
+            <input id="token" type="password" autocomplete="off" placeholder="github_pat_...">
+          </label>
+          <button class="primary" id="saveToken" type="button">Save token on this browser</button>
+          <button id="loadPosts" type="button">Load posts</button>
+          <button class="danger" id="clearToken" type="button">Forget token</button>
+        </div>
+
+        <div class="actions">
+          <button id="newPost" type="button">New post</button>
+        </div>
+
+        <div id="postList" class="post-list"></div>
+      </aside>
+
+      <section class="panel">
+        <div class="field-grid">
+          <label>
+            Title
+            <input id="title" autocomplete="off" placeholder="Post title">
+          </label>
+          <label>
+            Date
+            <input id="date" type="date">
+          </label>
+        </div>
+
+        <p></p>
+
+        <label>
+          Tags
+          <input id="tags" autocomplete="off" placeholder="it-support, jekyll, notes">
+        </label>
+
+        <p></p>
+
+        <label>
+          Content
+          <textarea id="content" spellcheck="true" placeholder="Write your post in Markdown..."></textarea>
+        </label>
+
+        <div class="actions">
+          <button class="primary" id="publish" type="button">Publish post</button>
+          <button id="preview" type="button">Preview Markdown</button>
+          <button class="danger" id="deletePost" type="button">Delete from GitHub</button>
+        </div>
+
+        <p id="status" class="status" aria-live="polite"></p>
+        <div id="previewPane" hidden></div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const owner = "Tom19840813";
+    const repo = "Tom19840813.github.io";
+    const branch = "main";
+    const apiBase = `https://api.github.com/repos/${owner}/${repo}/contents`;
+    const state = { path: "", sha: "" };
+
+    const $ = (id) => document.getElementById(id);
+    const today = () => new Date().toISOString().slice(0, 10);
+
+    $("token").value = localStorage.getItem("tm_post_writer_token") || "";
+    $("date").value = today();
+    $("content").value = "# New post\n\nWrite your post here.";
+
+    $("saveToken").addEventListener("click", () => {
+      localStorage.setItem("tm_post_writer_token", $("token").value.trim());
+      setStatus("Token saved on this browser.");
+    });
+
+    $("clearToken").addEventListener("click", () => {
+      localStorage.removeItem("tm_post_writer_token");
+      $("token").value = "";
+      setStatus("Token removed from this browser.");
+    });
+
+    $("loadPosts").addEventListener("click", loadPosts);
+    $("newPost").addEventListener("click", newPost);
+    $("publish").addEventListener("click", publishPost);
+    $("deletePost").addEventListener("click", deletePost);
+    $("preview").addEventListener("click", togglePreview);
+
+    function getToken() {
+      const token = $("token").value.trim() || localStorage.getItem("tm_post_writer_token");
+      if (!token) throw new Error("Add your GitHub token first.");
+      return token;
+    }
+
+    async function github(path, options = {}) {
+      const response = await fetch(`${apiBase}/${path}`, {
+        ...options,
+        headers: {
+          "Accept": "application/vnd.github+json",
+          "Authorization": `Bearer ${getToken()}`,
+          "X-GitHub-Api-Version": "2022-11-28",
+          ...(options.headers || {}),
+        },
+      });
+
+      const text = await response.text();
+      const data = text ? JSON.parse(text) : {};
+      if (!response.ok) {
+        throw new Error(data.message || "GitHub request failed.");
+      }
+
+      return data;
+    }
+
+    async function loadPosts() {
+      try {
+        setStatus("Loading posts from GitHub...");
+        const files = await github("_posts?ref=" + branch);
+        const posts = files
+          .filter((file) => file.type === "file" && /\.(md|markdown)$/i.test(file.name))
+          .sort((a, b) => b.name.localeCompare(a.name));
+
+        $("postList").innerHTML = posts.length ? posts.map((post) => `
+          <button class="post-item" type="button" data-path="${escapeHtml(post.path)}">
+            <strong>${escapeHtml(titleFromFilename(post.name))}</strong>
+            <small>${escapeHtml(post.name)}</small>
+          </button>
+        `).join("") : "<p class=\"hint\">No posts found.</p>";
+
+        document.querySelectorAll(".post-item").forEach((button) => {
+          button.addEventListener("click", () => loadPost(button.dataset.path));
+        });
+
+        setStatus(`Loaded ${posts.length} post${posts.length === 1 ? "" : "s"}.`);
+      } catch (error) {
+        setStatus(error.message);
+      }
+    }
+
+    async function loadPost(path) {
+      try {
+        setStatus("Loading post...");
+        const file = await github(path + "?ref=" + branch);
+        const raw = decodeBase64(file.content);
+        const parsed = parsePost(raw);
+
+        state.path = file.path;
+        state.sha = file.sha;
+        $("title").value = parsed.frontMatter.title || titleFromFilename(file.name);
+        $("date").value = parsed.frontMatter.date || dateFromFilename(file.name) || today();
+        $("tags").value = Array.isArray(parsed.frontMatter.tags) ? parsed.frontMatter.tags.join(", ") : "";
+        $("content").value = parsed.content;
+        $("previewPane").hidden = true;
+        setStatus(`Loaded ${file.path}`);
+      } catch (error) {
+        setStatus(error.message);
+      }
+    }
+
+    function newPost() {
+      state.path = "";
+      state.sha = "";
+      $("title").value = "";
+      $("date").value = today();
+      $("tags").value = "";
+      $("content").value = "# New post\n\nWrite your post here.";
+      $("previewPane").hidden = true;
+      setStatus("New post ready.");
+      $("title").focus();
+    }
+
+    async function publishPost() {
+      try {
+        const title = $("title").value.trim();
+        const date = $("date").value.trim() || today();
+        const content = $("content").value.trim();
+        if (!title) throw new Error("Add a title first.");
+        if (!content) throw new Error("Add content first.");
+
+        const path = `_posts/${date}-${slugify(title)}.md`;
+        const body = stringifyPost({
+          layout: "post",
+          title,
+          date,
+          tags: normalizeTags($("tags").value),
+        }, content);
+
+        const payload = {
+          message: state.path ? `Update blog post: ${title}` : `Add blog post: ${title}`,
+          content: encodeBase64(body),
+          branch,
+        };
+
+        if (state.sha && state.path === path) {
+          payload.sha = state.sha;
+        } else if (state.sha && state.path !== path) {
+          await deletePath(state.path, state.sha, `Rename blog post: ${title}`);
+        }
+
+        setStatus("Publishing to GitHub...");
+        const result = await github(path, {
+          method: "PUT",
+          body: JSON.stringify(payload),
+        });
+
+        state.path = path;
+        state.sha = result.content.sha;
+        setStatus(`Published ${path}. GitHub Pages will rebuild in a minute or two.`);
+        await loadPosts();
+      } catch (error) {
+        setStatus(error.message);
+      }
+    }
+
+    async function deletePost() {
+      try {
+        if (!state.path || !state.sha) throw new Error("Load a post first.");
+        if (!confirm(`Delete ${state.path}?`)) return;
+        await deletePath(state.path, state.sha, `Delete blog post: ${state.path}`);
+        newPost();
+        await loadPosts();
+        setStatus("Post deleted from GitHub.");
+      } catch (error) {
+        setStatus(error.message);
+      }
+    }
+
+    async function deletePath(path, sha, message) {
+      return github(path, {
+        method: "DELETE",
+        body: JSON.stringify({ message, sha, branch }),
+      });
+    }
+
+    function togglePreview() {
+      const pane = $("previewPane");
+      pane.hidden = !pane.hidden;
+      pane.innerHTML = markdownPreview($("content").value);
+    }
+
+    function parsePost(raw) {
+      const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
+      if (!match) return { frontMatter: {}, content: raw };
+      return { frontMatter: parseFrontMatter(match[1]), content: match[2] };
+    }
+
+    function parseFrontMatter(text) {
+      const data = {};
+      text.split(/\r?\n/).forEach((line) => {
+        const match = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
+        if (!match) return;
+        const key = match[1];
+        const value = match[2].trim();
+        if (value.startsWith("[") && value.endsWith("]")) {
+          data[key] = value.slice(1, -1).split(",").map((tag) => unquote(tag.trim())).filter(Boolean);
+        } else {
+          data[key] = unquote(value);
+        }
+      });
+      return data;
+    }
+
+    function stringifyPost(frontMatter, content) {
+      const yaml = Object.entries(frontMatter)
+        .filter(([, value]) => value !== "" && value !== null && value !== undefined)
+        .map(([key, value]) => Array.isArray(value)
+          ? `${key}: [${value.map(yamlQuote).join(", ")}]`
+          : `${key}: ${yamlQuote(value)}`)
+        .join("\n");
+      return `---\n${yaml}\n---\n\n${content}\n`;
+    }
+
+    function markdownPreview(text) {
+      return escapeHtml(text)
+        .replace(/^### (.*)$/gm, "<h3>$1</h3>")
+        .replace(/^## (.*)$/gm, "<h2>$1</h2>")
+        .replace(/^# (.*)$/gm, "<h1>$1</h1>")
+        .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+        .replace(/\n{2,}/g, "</p><p>")
+        .replace(/^/, "<p>")
+        .replace(/$/, "</p>");
+    }
+
+    function normalizeTags(value) {
+      return String(value).split(",").map((tag) => tag.trim()).filter(Boolean);
+    }
+
+    function yamlQuote(value) {
+      const text = String(value);
+      if (/^[A-Za-z0-9_./:-]+$/.test(text)) return text;
+      return `"${text.replaceAll('"', '\\"')}"`;
+    }
+
+    function unquote(value) {
+      return value.replace(/^["']|["']$/g, "");
+    }
+
+    function slugify(text) {
+      return String(text)
+        .toLowerCase()
+        .normalize("NFKD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "")
+        .slice(0, 80) || "untitled-post";
+    }
+
+    function titleFromFilename(name) {
+      return name
+        .replace(/\.(md|markdown)$/i, "")
+        .replace(/^\d{4}-\d{2}-\d{2}-/, "")
+        .replace(/-/g, " ")
+        .replace(/\b\w/g, (letter) => letter.toUpperCase());
+    }
+
+    function dateFromFilename(name) {
+      const match = name.match(/^(\d{4}-\d{2}-\d{2})-/);
+      return match ? match[1] : "";
+    }
+
+    function encodeBase64(text) {
+      return btoa(unescape(encodeURIComponent(text)));
+    }
+
+    function decodeBase64(text) {
+      return decodeURIComponent(escape(atob(text.replace(/\s/g, ""))));
+    }
+
+    function escapeHtml(text) {
+      return String(text).replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;",
+      }[char]));
+    }
+
+    function setStatus(message) {
+      $("status").textContent = message;
+    }
+  </script>
+</body>
+</html>

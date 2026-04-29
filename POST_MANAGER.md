@@ -2,6 +2,8 @@
 
 This repo includes a small local app for creating and editing Jekyll posts without installing a CMS.
 
+For browser-based publishing on GitHub Pages, use `admin.html` and follow `ONLINE_POST_WRITER.md`.
+
 ## Run
 
 ```powershell
