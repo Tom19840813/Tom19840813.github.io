@@ -1,0 +1,8 @@
+title: Tamas Molnar
+description: IT support portfolio, AI projects, and technical notes.
+url: "https://tom19840813.github.io"
+baseurl: ""
+permalink: /blog/:year/:month/:day/:title/
+timezone: Europe/London
+markdown: kramdown
+theme: null

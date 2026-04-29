@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title }} | {{ site.title }}</title>
+  <meta name="description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 155 }}">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <style>
+    .post-shell { width: min(860px, calc(100% - 32px)); margin: 0 auto; padding: 48px 0 72px; }
+    .post-meta { color: #687385; font-size: 0.95rem; }
+    .post-content { font-size: 1.06rem; line-height: 1.75; }
+    .post-content img { max-width: 100%; height: auto; border-radius: 8px; }
+    .post-content pre { overflow: auto; padding: 16px; border-radius: 8px; background: #101820; color: #f7fafc; }
+  </style>
+</head>
+<body>
+  <main class="post-shell">
+    <p><a href="/blog/">Blog</a> / <a href="/">Home</a></p>
+    <article>
+      <header>
+        <h1>{{ page.title }}</h1>
+        <p class="post-meta">{{ page.date | date: "%d %B %Y" }}{% if page.tags.size > 0 %} / {{ page.tags | join: ", " }}{% endif %}</p>
+      </header>
+      <div class="post-content">
+        {{ content }}
+      </div>
+    </article>
+  </main>
+</body>
+</html>

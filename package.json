@@ -1,0 +1,10 @@
+{
+  "name": "tom19840813-github-io",
+  "private": true,
+  "scripts": {
+    "posts": "node scripts/post-manager.js",
+    "posts:debug": "node scripts/post-manager.js --debug",
+    "jekyll:serve": "bundle exec jekyll serve --livereload",
+    "jekyll:build": "bundle exec jekyll build"
+  }
+}
