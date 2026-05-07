@@ -256,7 +256,14 @@ textarea {
     display: flex;
     flex-wrap: wrap;
     gap: 14px;
-    margin-bottom: 28px;
+    margin-bottom: 12px;
+}
+
+.resume-note {
+    color: var(--muted);
+    font-size: 0.94rem;
+    font-weight: 800;
+    margin: 0 0 28px;
 }
 
 .btn {

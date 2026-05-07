@@ -89,6 +89,14 @@ a {
     text-decoration: none;
 }
 
+.resume-updated {
+    color: var(--muted);
+    flex-basis: 100%;
+    font-size: 0.92rem;
+    font-weight: 800;
+    text-align: right;
+}
+
 .resume-block {
     padding-top: 28px;
 }
@@ -188,6 +196,10 @@ a {
 
     .resume-actions {
         justify-content: start;
+    }
+
+    .resume-updated {
+        text-align: left;
     }
 }
 
