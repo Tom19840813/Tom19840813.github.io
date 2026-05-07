@@ -159,7 +159,7 @@ textarea {
 
 .brand-mark {
     align-items: center;
-    background: linear-gradient(135deg, var(--teal), #123c3b);
+    background: linear-gradient(135deg, var(--teal), #123c3b 58%, var(--amber));
     border-radius: 16px;
     box-shadow: var(--shadow-soft);
     color: #fefbf7;
@@ -172,10 +172,25 @@ textarea {
     width: 46px;
 }
 
+.brand-lockup {
+    display: grid;
+    gap: 1px;
+    line-height: 1.1;
+}
+
 .brand-text {
-    font-size: 0.98rem;
+    color: var(--ink);
+    font-size: 1rem;
     font-weight: 800;
     letter-spacing: 0.02em;
+}
+
+.brand-subtext {
+    color: var(--muted);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
 }
 
 .site-nav {
@@ -679,7 +694,7 @@ textarea {
 .contact-grid {
     display: grid;
     gap: 16px;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
     margin-bottom: 24px;
 }
 
@@ -698,6 +713,18 @@ textarea {
     font-weight: 800;
     text-decoration: none;
     word-break: break-word;
+}
+
+.contact-card strong {
+    color: #f7f4ef;
+    font-size: 1.02rem;
+    line-height: 1.3;
+}
+
+.contact-card p {
+    color: rgba(247, 244, 239, 0.68);
+    font-size: 0.92rem;
+    margin: 0;
 }
 
 .copy-btn {
@@ -787,8 +814,7 @@ textarea {
     .metric-grid,
     .proof-grid,
     .capability-grid,
-    .project-grid,
-    .contact-grid {
+    .project-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
@@ -880,7 +906,7 @@ textarea {
         padding: 24px;
     }
 
-    .brand-text {
+    .brand-lockup {
         display: none;
     }
 
